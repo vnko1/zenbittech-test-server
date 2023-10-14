@@ -10,6 +10,7 @@ import { middlewares } from "app/middlewares";
 export class Tcp implements IService {
   private static instance: Tcp;
   private routePrefix = "/api";
+
   public server = express();
 
   constructor() {
@@ -33,7 +34,7 @@ export class Tcp implements IService {
     });
 
     return new Promise<boolean>((resolve) => {
-      server.listen(4000, () => {
+      server.listen(4000, async () => {
         console.log("Tcp service started on port 4000");
 
         return resolve(true);
