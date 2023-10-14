@@ -2,18 +2,18 @@ import { Sequelize } from "sequelize";
 
 import { IService } from "types/services.type";
 
-const {
-  POSTGRES_DATABASE,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_HOST,
-  POSTGRES_PORT,
-} = process.env;
+// const {
+//   POSTGRES_DATABASE,
+//   POSTGRES_USER,
+//   POSTGRES_PASSWORD,
+//   POSTGRES_HOST,
+//   POSTGRES_PORT,
+// } = process.env;
 
 export class DB {
   private static instance: DB;
   private sequelize = new Sequelize("zenDb", "admin", "admin", {
-    host: POSTGRES_HOST,
+    host: "http://localhost:",
     port: 5432,
     dialect: "postgres",
   });
