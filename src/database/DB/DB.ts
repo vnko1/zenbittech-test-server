@@ -11,7 +11,7 @@ const dbHost = DB_HOST ?? "localhost";
 
 export class DB implements IService {
   private static instance: DB;
-  private sequelize = new Sequelize(dbName, dbUser, dbPass, {
+  static sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
     port: 5432,
     dialect: "postgres",
@@ -25,7 +25,7 @@ export class DB implements IService {
 
   async init() {
     try {
-      await this.sequelize.authenticate();
+      await DB.sequelize.authenticate();
       console.log("Connection has been established successfully.");
     } catch (error) {
       console.log("Unable to connect to the database:", error);

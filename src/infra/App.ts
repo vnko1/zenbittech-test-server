@@ -1,8 +1,7 @@
-import { Sequelize } from "sequelize";
 import { Tcp } from "./Tcp";
 
-import { IService } from "types/services.type";
-import { DB } from "database/DB/DB";
+import { IService } from "types";
+import { DB } from "database";
 
 export class App implements IService {
   private static instance: App;
