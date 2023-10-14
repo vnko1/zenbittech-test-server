@@ -1,3 +1,3 @@
 export interface IService {
-  init(): Promise<boolean>;
+  init(): Promise<boolean> | Promise<void>;
 }

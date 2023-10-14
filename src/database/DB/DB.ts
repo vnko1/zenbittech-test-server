@@ -2,25 +2,24 @@ import { Sequelize } from "sequelize";
 
 import { IService } from "types/services.type";
 
-// const {
-//   POSTGRES_DATABASE,
-//   POSTGRES_USER,
-//   POSTGRES_PASSWORD,
-//   POSTGRES_HOST,
-//   POSTGRES_PORT,
-// } = process.env;
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-export class DB {
+const dbName = DB_NAME ?? "postgres";
+const dbUser = DB_USER ?? "postgres";
+const dbPass = DB_PASSWORD ?? "postgres";
+const dbHost = DB_HOST ?? "localhost";
+
+export class DB implements IService {
   private static instance: DB;
-  private sequelize = new Sequelize("zenDb", "admin", "admin", {
-    host: "http://localhost:",
+  private sequelize = new Sequelize(dbName, dbUser, dbPass, {
+    host: dbHost,
     port: 5432,
     dialect: "postgres",
   });
 
   constructor() {
     if (!DB.instance) DB.instance = this;
-
+    console.log(typeof DB_NAME);
     return DB.instance;
   }
 
