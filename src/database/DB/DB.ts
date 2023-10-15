@@ -4,18 +4,18 @@ import { IService } from "types/services.type";
 
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-const dbName = DB_NAME ?? "postgres";
-const dbUser = DB_USER ?? "postgres";
-const dbPass = DB_PASSWORD ?? "postgres";
-const dbHost = DB_HOST ?? "localhost";
-
 export class DB implements IService {
   private static instance: DB;
-  static sequelize = new Sequelize(dbName, dbUser, dbPass, {
-    host: dbHost,
-    port: 5432,
-    dialect: "postgres",
-  });
+  static sequelize = new Sequelize(
+    `${DB_NAME}`,
+    `${DB_USER}`,
+    `${DB_PASSWORD}`,
+    {
+      host: DB_HOST,
+      port: 5432,
+      dialect: "postgres",
+    }
+  );
 
   constructor() {
     if (!DB.instance) DB.instance = this;

@@ -5,17 +5,24 @@ import {
   Body,
   Param,
 } from "routing-controllers";
-import { ApiResponse } from "../../../helpers";
+import { ApiError, ApiResponse } from "../../../helpers";
 import { RealEstateDB } from "database";
-import { RealEstateBody } from "./RealEstate.type";
+import { IRealEstate, RealEstateBody } from "./RealEstate.type";
 
 @JsonController("/realEstate")
 export default class RealEstate {
   @Get()
   async getAll() {
-    const response = await RealEstateDB.findAll({ raw: true });
+    try {
+      const response = await RealEstateDB.findAll({ raw: true });
 
-    return new ApiResponse(true, response);
+      return new ApiResponse(true, response);
+    } catch (error) {
+      throw new ApiError(400, {
+        code: "SOMETHING_WRONG",
+        message: error.message,
+      }).toJSON();
+    }
   }
 
   @Post()
@@ -23,10 +30,20 @@ export default class RealEstate {
     @Body()
     body: RealEstateBody
   ) {
-    const response = await RealEstateDB.create(body, {
-      returning: false,
-    });
+    try {
+      const response = await RealEstateDB.create(body, {
+        raw: true,
+      });
 
-    return new ApiResponse(true, response);
+      return new ApiResponse(
+        true,
+        JSON.parse(JSON.stringify(response))
+      );
+    } catch (error) {
+      throw new ApiError(400, {
+        code: "SOMETHING_WRONG",
+        message: error.message,
+      }).toJSON();
+    }
   }
 }

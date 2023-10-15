@@ -3,7 +3,6 @@ import {
   Model,
   InferAttributes,
   InferCreationAttributes,
-  CreationOptional,
 } from "sequelize";
 import { DB } from "../..";
 
@@ -11,6 +10,7 @@ export class RealEstateDB extends Model<
   InferAttributes<RealEstateDB>,
   InferCreationAttributes<RealEstateDB>
 > {
+  // declare _id: string;
   declare title: string;
   declare price: number;
   declare tiket: number;
@@ -48,6 +48,10 @@ RealEstateDB.init(
       allowNull: false,
       defaultValue: 75,
     },
+    // _id: {
+    //   type: DataTypes.UUID,
+    //   defaultValue: DataTypes.UUIDV1,
+    // },
     imageUrl: { type: DataTypes.STRING, allowNull: false },
   },
   {
@@ -55,6 +59,9 @@ RealEstateDB.init(
     modelName: "RealEstate",
     createdAt: false,
     updatedAt: false,
+    // defaultScope: {
+    //   attributes: { exclude: ["id"] },
+    // },
   }
 );
 

@@ -5,7 +5,6 @@ import { useExpressServer } from "routing-controllers";
 import { IService } from "types/services.type";
 import { controllers } from "app/domain";
 import { middlewares } from "app/middlewares";
-// import { resolve } from "path";
 
 export class Tcp implements IService {
   private static instance: Tcp;
