@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { App } from "./infra/App";
+import { App } from "./infra";
 
 const app = new App();
 
