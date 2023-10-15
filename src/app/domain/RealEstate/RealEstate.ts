@@ -1,13 +1,7 @@
-import {
-  JsonController,
-  Get,
-  Post,
-  Body,
-  Param,
-} from "routing-controllers";
-import { ApiError, ApiResponse } from "../../../helpers";
+import { JsonController, Get, Post, Body } from "routing-controllers";
+import { ApiError, ApiResponse } from "helpers";
 import { RealEstateDB } from "database";
-import { IRealEstate, RealEstateBody } from "./RealEstate.type";
+import { RealEstateBody } from "./RealEstate.type";
 
 @JsonController("/realEstate")
 export default class RealEstate {
